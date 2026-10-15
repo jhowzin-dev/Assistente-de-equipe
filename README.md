@@ -1,6 +1,6 @@
 # 🤖 Assistente de Equipe
 
-![Ícone do Assistente de Equipe](./icon-bot.png)
+![Assistente de Equipe](./img/image.png)
 
 Bot para Microsoft Teams que funciona como um **assistente de equipe**.
 
