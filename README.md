@@ -2,42 +2,51 @@
 
 ![Assistente de Equipe](./img/image.png)
 
-Bot para Microsoft Teams que funciona como um **assistente de equipe**.
+Bot Microsoft Teams desenvolvido com **Microsoft 365 Agents Toolkit** e Teams SDK v2. Baseado no template Basic Bot, pronto para evoluir em um assistente real de equipe.
 
-## O que ele faz
+## 🚀 Rodando localmente
 
-O Assistente de Equipe foi criado para apoiar o time no dia a dia, centralizando informações e facilitando a comunicação dentro do Teams.
+**Pré-requisitos**
+- Node.js 22
+- Microsoft 365 Agents Toolkit VS Code Extension ≥5.0 ou CLI
 
-### Funcionalidades principais
+```bash
+npm install
+npm run dev:teamsfx:playground
+# ou F5 no VS Code > Debug in Microsoft 365 Agents Playground
+```
 
-- **Mensagem de boas-vindas**  
-  Recebe novos usuários e explica como interagir com o bot.
+O Playground abre em `http://localhost:56150`. O bot escuta em `http://127.0.0.1:3978`.
 
-- **Respostas rápidas**  
-  Responde perguntas simples do time (status, links, informações úteis, etc.).
+## 📁 Estrutura
 
-- **Processamento de mensagens**  
-  Recebe o que o usuário digita e devolve uma resposta baseada na lógica do bot.
+- `app.ts` → lógica do bot, handler de mensagens e estado
+- `index.ts` → inicialização do app
+- `appPackage/manifest.json` → nome, descrição e metadados do app
+- `m365agents.yml` / `m365agents.playground.yml` → configuração do Toolkit
+- `env/` → variáveis por ambiente
 
-- **Base para automações**  
-  Serve como ponto de partida para evoluir com:
-  - Notificações automáticas
-  - Integração com Microsoft Graph
-  - Consultas de status de projetos
-  - Lembretes e alertas
-  - Comandos personalizados do time
+## 💬 Comandos disponíveis
 
-## Objetivo
+Atualmente o bot é um echo com estado por conversa:
 
-Criar um bot simples e funcional que possa ser usado no trabalho, servindo tanto como ferramenta prática para a equipe quanto como exercício de desenvolvimento full stack com Microsoft Teams.
+- Qualquer mensagem → `[n] you said: <texto>`
+- `/reset` → apaga estado da conversa
+- `/count` → mostra quantas mensagens você enviou
+- `/state` → exibe JSON do estado salvo
+- `/diag` → exibe a activity completa
+- `/runtime` → exibe versão Node e SDK
 
-## Como usar
+Estado é armazenado em `LocalStorage` por `conversationId`.
 
-Basta enviar uma mensagem para o bot no Teams (ou no Microsoft 365 Agents Playground durante o desenvolvimento). Ele processa a mensagem e retorna uma resposta.
+## 🛠️ Próximos passos
 
-## Próximas evoluções
+- Trocar o echo por intenções reais em `app.ts`
+- Adicionar Adaptive Cards e comandos no manifest
+- Integrar Microsoft Graph com autenticação
+- Persistência real: Cosmos DB / SQL
+- Publicar para Teams via Toolkit
 
-- Comandos específicos (`/status`, `/ajuda`, `/links`, etc.)
-- Integração com calendário e tarefas
-- Notificações de build ou eventos importantes
-- Autenticação e acesso a dados da organização
+## 📝 Objetivo
+
+Criar base limpa para um assistente de trabalho, com evolução gradual para automações, notificações e integração com dados da organização.
