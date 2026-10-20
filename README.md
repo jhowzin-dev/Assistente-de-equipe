@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./img/logo.png" alt="Assistente de Equipe" width="140" />
+<img src="./img/logo.svg" alt="Assistente de Equipe" width="140" />
 
 # Assistente de Equipe
 
