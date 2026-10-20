@@ -1,0 +1,36 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agents": {
+    "orchestrator": {
+      "model": "meta/muse-glimmer-30b",
+      "tools": ["task", "bash"]
+    },
+    "teams-implementer": {
+      "model": "meta/muse-glimmer-30b",
+      "tools": ["edit", "bash", "read"],
+      "skill": "teams-bot-skill"
+    },
+    "teams-frontend-engineer": {
+      "model": "meta/muse-glimmer-30b",
+      "tools": ["edit", "bash", "read"],
+      "skill": "teams-bot-skill"
+    },
+    "code-reviewer": {
+      "model": "meta/muse-glimmer-30b",
+      "tools": ["read", "bash"]
+    },
+    "test-engineer": {
+      "model": "meta/muse-glimmer-30b",
+      "tools": ["edit", "bash", "read"],
+      "skill": "teams-bot-skill"
+    }
+  },
+  "skills": {
+    "teams-bot-skill": {
+      "path": ".opencode/skills/teams-bot-skill/SKILL.md"
+    },
+    "teams-llm-skill": {
+      "path": ".opencode/skills/teams-llm-skill/SKILL.md"
+    }
+  }
+}

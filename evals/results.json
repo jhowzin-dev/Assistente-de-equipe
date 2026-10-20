@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "prompt": "Implementar comando /runtime que retorna status do bot via Teams, usando app.ts e manifest.json. O agente deve delegar ao teams-implementer.",
+    "expected_output": "",
+    "output": "",
+    "error": "\u001b[91m\u001b[1mError: \u001b[0m{\n  \"name\": \"UnknownError\",\n  \"data\": {\n    \"message\": \"Unexpected server error. Check server logs for details.\",\n    \"ref\": \"err_5aece36a\"\n  }\n}\n",
+    "exit_code": 1,
+    "goal_gate_passed": false,
+    "passed": false,
+    "duration_s": 2.1,
+    "session_id": null
+  },
+  {
+    "id": 2,
+    "prompt": "Criar Adaptive Card de onboarding para novo usuario no Teams. O agente deve delegar ao teams-frontend-engineer.",
+    "expected_output": "",
+    "output": "",
+    "error": "\u001b[91m\u001b[1mError: \u001b[0m{\n  \"name\": \"UnknownError\",\n  \"data\": {\n    \"message\": \"Unexpected server error. Check server logs for details.\",\n    \"ref\": \"err_31f1a3cd\"\n  }\n}\n",
+    "exit_code": 1,
+    "goal_gate_passed": false,
+    "passed": false,
+    "duration_s": 2.1,
+    "session_id": null
+  },
+  {
+    "id": 3,
+    "prompt": "Revisar diff de PR em app.ts identificando violacao de RBAC e risco de performance.",
+    "expected_output": "",
+    "output": "",
+    "error": "\u001b[91m\u001b[1mError: \u001b[0m{\n  \"name\": \"UnknownError\",\n  \"data\": {\n    \"message\": \"Unexpected server error. Check server logs for details.\",\n    \"ref\": \"err_091af3dd\"\n  }\n}\n",
+    "exit_code": 1,
+    "goal_gate_passed": false,
+    "passed": false,
+    "duration_s": 2.3,
+    "session_id": null
+  },
+  {
+    "id": 4,
+    "prompt": "Testar comando /diag no Playground e validar logs obrigatorios.",
+    "expected_output": "",
+    "output": "",
+    "error": "\u001b[91m\u001b[1mError: \u001b[0m{\n  \"name\": \"UnknownError\",\n  \"data\": {\n    \"message\": \"Unexpected server error. Check server logs for details.\",\n    \"ref\": \"err_f78ed960\"\n  }\n}\n",
+    "exit_code": 1,
+    "goal_gate_passed": false,
+    "passed": false,
+    "duration_s": 2.2,
+    "session_id": null
+  }
+]

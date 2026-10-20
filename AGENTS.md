@@ -1,79 +1,44 @@
-# Assistente de Equipe — Orquestração Teams [ENFORCEMENT v1.0]
+# Assistente de Equipe � Orquestra��o Teams [ENFORCEMENT v3.0]
 
----
+## OBRIGAT�RIO � Hierarquia de Comando
 
-## 📋 OBRIGATÓRIO — Fluxo de Trabalho
+N�vel 0: System (Instru��es base do modelo)
+N�vel 1: Harness (Regras do AGENTS.md e opencode.json)
+N�vel 6: User (Pedidos espec�ficos da sess�o)
 
-> **QUALQUER modelo de IA que ler este ficheiro DEVE seguir estas regras.**
-> **NÃO há exceções. NÃO há atalhos. NÃO é opcional.**
-> **VIOLAÇÃO = BLOQUEIO IMEDIATO E ESCALAÇÃO PARA HUMANO.**
+## Regra Central Inviol�vel
 
----
+NUNCA analise, revise, implemente, debugue ou teste c�digo/infra/config diretamente sem delegar ao agente especialista via Task.
 
-### 🚫 Regra Central — INVIOLÁVEL
+## Tabela de Roteamento Impec�vel
 
-**NUNCA faça análise, revisão, implementação, debug ou teste — de código, infraestrutura ou configuração — diretamente.**
+| Inten��o do usu�rio | Agente Especialista | Skill Necess�ria | Gatilhos |
+| Analisa/revisa diff/PR | code-reviewer | teams-bot-skill | analisa, revisa, diff, PR |
+| Implementa/altera bot | teams-implementer | teams-bot-skill | implementa, app.ts, index.ts, manifest |
+| Adaptive Cards/UI Teams | teams-frontend-engineer | teams-bot-skill | card, adaptive, manifest UI |
+| Testes/comandos Playground | test-engineer | teams-bot-skill | testa, comando, /runtime, /diag |
+| IA/LLM,RAG,orquestra��o | - | teams-llm-skill | IA, LLM, RAG, Copilot |
+| Pedido vago/multi-dom�nio | orchestrator | - | Clareza < 0.7 |
+| Pergunta informativa simples | Responder diretamente | N/A | Sem modificar/analisar c�digo |
 
-**SEMPRE delega para o agente especialista usando a ferramenta Task.**
+## CICLO DE VALIDA��O
 
-**A ÚNICA exceção é pergunta informativa pura (conceitual, sem ler arquivos do projeto).**
+Execu��o ? Teste ? Verifica��o de Exit Code ? Corre��o
 
----
+Nenhuma tarefa � conclu�da sem Goal Gate: exit code 0.
 
-## 🗺️ Tabela de Roteamento
+## SAFETY RAILS
 
-| Intenção do usuário | Agente Especialista | Skill Necessária | Gatilhos |
-|---------------------|--------------------|------------------|----------|
-| Analisa/revisa diff/PR | `code-reviewer` | `teams-bot-skill` | "analisa", "revisa", "diff", "PR" |
-| Implementa/ altera bot | `teams-implementer` | `teams-bot-skill` | "implementa", `app.ts`, `index.ts`, `manifest` |
-| Adaptive Cards / UI Teams | `teams-frontend-engineer` | `teams-bot-skill` | "card", "adaptive", "manifest UI" |
-| Testes / comandos Playground | `test-engineer` | `teams-bot-skill` | "testa", "comando", "/runtime", "/diag" |
-| IA/LLM, RAG, orquestração | — | `teams-llm-skill` | "IA", "LLM", "RAG", "Copilot" |
-| Pedido vago/multi-domínio | `orchestrator` | — | Clareza < 0.7 |
-| Pergunta informativa simples | Responder diretamente | N/A | Sem modificar/analisar código |
+Timeouts obrigat�rios, limite de retry m�x 5, logs obrigat�rios para cada execu��o delegada.
 
----
+## Matriz de Permiss�es
 
-## 🚫 Regras Invioláveis
+Analistas/Arquitetos: edit deny
+Implementadores: edit allow
+Orquestrador: edit deny
 
-| # | Regra | Agent |
-|---|-------|-------|
-| 1 | NUNCA analise código sem delegar | `code-reviewer` |
-| 2 | NUNCA implemente sem delegar | `teams-implementer` / `teams-frontend-engineer` |
-| 3 | NUNCA teste sem delegar | `test-engineer` |
-| 4 | ÚNICA exceção: pergunta informativa | N/A |
+## Goal Gate
 
-**Enforcement:** Violação = BLOQUEIO IMEDIATO + LOG + ESCALAÇÃO
+npm run build sem erros
+Bot responde a /runtime e /diag no Playground
 
----
-
-## 🗂️ Arquitetura
-
-- **orchestrator**: roteia pedidos vagos/multi-domínio
-- **teams-implementer**: `app.ts`, `index.ts`, `appPackage/manifest.json`, `m365agents*.yml`, `env/`
-- **teams-frontend-engineer**: Adaptive Cards, UI Teams, manifest
-- **code-reviewer**: revisão de diffs/PRs
-- **test-engineer**: valida comandos e Playground
-
-### Stack real
-Node.js 22 / TypeScript / Teams SDK v2 / Microsoft 365 Agents Toolkit
-Ferramentas: Agents Playground / Teams App Test Tool, Debug Bot Framework legado
-Evolução: Copilot Studio, Bot Framework Connector/LLM, RAG, orquestração, SharePoint, Cosmos DB/SQL
-
----
-
-## 🎯 Goal Gate
-
-Não declarar feito sem validar:
-- `npm run build` sem erros
-- Bot responde a `/runtime` e `/diag` no Playground
-
----
-
-## 📜 Convenções
-
-- Idioma docs pt-BR, código inglês
-- Estado por `conversationId`, hoje LocalStorage
-- Confirmar ações sensíveis
-- Não inventar dados, usar Graph quando necessário
-- Mensagens curtas, cards acionáveis
