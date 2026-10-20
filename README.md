@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./img/logo.svg" alt="Assistente de Equipe" width="140" />
+<img src="./img/logo.png" alt="Assistente de Equipe" width="140" />
 
 # Assistente de Equipe
 
@@ -221,7 +221,7 @@ flowchart TB
 ├── m365agents.playground.yml # Configuração do Toolkit (Playground local)
 ├── env/                      # Variáveis por ambiente
 └── img/
-    └── logo.svg              # Logo do projeto
+    └── logo.png              # Logo do projeto
 ```
 
 ### Responsabilidade de cada arquivo
