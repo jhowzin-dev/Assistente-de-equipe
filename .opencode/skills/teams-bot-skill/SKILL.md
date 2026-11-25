@@ -48,3 +48,13 @@ Não é perfil de comportamento — comportamento está nos agents teams-impleme
 - `npm run build` sem erros
 - Bot responde `/runtime` e `/diag` no Playground
 
+## 6. Limites e validação
+
+- A resposta comum ainda é echo; esta skill não implica que IA, Graph ou RAG estejam implementados.
+- `npm test` é placeholder e retorna erro. Não reportar como suíte válida.
+- `npm run build` valida TypeScript, não comportamento no Teams. Playground é validação separada e manual.
+- `/diag` retorna activity e `/state` expõe estado: restringir a uso de desenvolvimento e não registrar/compartilhar payloads com dados pessoais ou segredos.
+- `LocalStorage` é estado local de desenvolvimento, não persistência de produção/escala.
+- Para Graph, LLM, RAG ou ferramentas externas, aplicar `teams-llm-skill` além desta skill.
+- Não declarar comandos, autenticação ou permissões de produção funcionais sem verificar manifest, configuração Toolkit e fluxo real.
+
