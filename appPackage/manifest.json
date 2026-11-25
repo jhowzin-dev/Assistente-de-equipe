@@ -38,16 +38,35 @@
                 {
                   "scopes": ["personal", "team", "groupChat"],
                   "triggers": ["mention"],
-                  "commands": [
-                      {
-                          "title": "Hi",
-                          "description": "Say hi to the bot."
-                      },
-                      {
-                          "title": "/reset",
-                          "description": "Delete conversation state."
-                      }
-                  ]
+                 "commands": [
+  {
+    "title": "Hi",
+    "description": "Say hi to the bot."
+  },
+  {
+    "title": "/reset",
+    "description": "Delete conversation state."
+  },
+  {
+    "title": "/tarefas",
+    "description": "Listar tarefas do usuário"
+  },
+  {
+    "title": "/status",
+    "description": "Consultar saúde dos serviços"
+  },
+  {
+    "title": "/deploys",
+    "description": "Ver deploys recentes"
+  },
+  {
+    "title": "/doc",
+    "description": "Buscar documentação"
+  },
+  {
+    "title": "/incidentes",
+    "description": "Consultar incidentes ativos"
+  }
                 }
             ]
         }

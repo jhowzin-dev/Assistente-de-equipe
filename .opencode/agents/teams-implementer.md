@@ -40,4 +40,7 @@ Implementa e altera código do bot Teams com Teams SDK v2 + Microsoft 365 Agents
 - Confirmar ações sensíveis
 - Linguagem natural e direta
 - Mensagens curtas, cards acionáveis
+- Não adicionar LLM, RAG ou ferramentas externas implicitamente; exigir escopo e fontes autorizadas definidos na tarefa.
+- Para LLM/RAG, seguir também `teams-llm-skill`: autorização no servidor, validação de argumentos, timeouts e fontes rastreáveis.
+- Executar somente as validações compatíveis com o pedido e reportar comando, exit code e falhas sem alegar sucesso não verificado.
 

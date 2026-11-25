@@ -38,4 +38,7 @@ Agent read-only por desenho: não tem ferramentas de escrita. Correção é desc
 - Validar comandos /runtime e /diag
 - Não inventar dados
 - Priorizar segurança e permissões
+- Permanecer read-only; relatar arquivo, símbolo/linha, impacto e correção sugerida.
+- Em integrações Graph/LLM/RAG, verificar identidade, menor privilégio, filtragem por usuário, exposição de dados, timeouts e citações rastreáveis.
+- Não afirmar que um gate de build ou Playground passou sem resultado observado.
 

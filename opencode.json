@@ -1,1 +1,59 @@
-{ "$schema": "https://opencode.ai/config.json", "default_agent": "orchestrator", "orchestrator_prompt": "VOC  … O ORQUESTRADOR. Sua lei È o AGENTS.md. VocÍ NUNCA escreve cÛdigo diretamente. Sua funÁ„o È gerir o fluxo de trabalho atravÈs do Orchestrator Gate e delegar via Task. Execution Gate: InstruÁ„o ? ResoluÁ„o ? Carregamento ? ValidaÁ„o ? Planejamento ? Check ? Ferramenta ? VerificaÁ„o. Orchestrator Gate: Resolver ? Carregar ? Validar ? Planejar ? Confirmar. Goal Gate: Exit Code 0 ? OBJETIVO ALCAN«ADO.", "permissions_matrix": { "analyst_architect": { "edit": "deny" }, "implementer": { "edit": "allow" }, "orchestrator": { "edit": "deny" } }, "agents": { "orchestrator": { "model": "meta/muse-glimmer-30b", "tools": ["task","bash"], "permission": { "edit": "deny" } }, "teams-implementer": { "model": "meta/muse-glimmer-30b", "tools": ["edit","bash","read"], "skill": "teams-bot-skill", "permission": { "edit": "allow" } }, "teams-frontend-engineer": { "model": "meta/muse-glimmer-30b", "tools": ["edit","bash","read"], "skill": "teams-bot-skill", "permission": { "edit": "allow" } }, "code-reviewer": { "model": "meta/muse-glimmer-30b", "tools": ["read","bash"], "permission": { "edit": "deny" } }, "test-engineer": { "model": "meta/muse-glimmer-30b", "tools": ["edit","bash","read"], "skill": "teams-bot-skill", "permission": { "edit": "allow" } } }, "skills": { "teams-bot-skill": { "path": ".opencode/skills/teams-bot-skill/SKILL.md" }, "teams-llm-skill": { "path": ".opencode/skills/teams-llm-skill/SKILL.md" } } }
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "orchestrator",
+  "instructions": ["AGENTS.md"],
+  "plugin": [],
+  "agent": {
+    "orchestrator": {
+      "description": "Planeja e delega tarefas de engenharia do bot Teams; n√£o implementa diretamente.",
+      "mode": "primary",
+      "prompt": "{file:./.opencode/agents/orchestrator.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "task": {"*": "allow"}
+      },
+      "tools": {"task": true, "read": true, "edit": false, "bash": false}
+    },
+    "teams-implementer": {
+      "description": "Implementa handlers, estado e integra√ß√µes do bot Teams.",
+      "mode": "subagent",
+      "prompt": "{file:./.opencode/agents/teams-implementer.md}\n{file:./.opencode/skills/teams-bot-skill/SKILL.md}",
+      "permission": {"edit": "allow", "bash": "allow", "task": {"*": "deny"}},
+      "tools": {"read": true, "edit": true, "bash": true}
+    },
+    "teams-frontend-engineer": {
+      "description": "Implementa Adaptive Cards e UI declarada para Teams.",
+      "mode": "subagent",
+      "prompt": "{file:./.opencode/agents/teams-frontend-engineer.md}\n{file:./.opencode/skills/teams-bot-skill/SKILL.md}",
+      "permission": {"edit": "allow", "bash": "allow", "task": {"*": "deny"}},
+      "tools": {"read": true, "edit": true, "bash": true}
+    },
+    "code-reviewer": {
+      "description": "Revisa c√≥digo e configura√ß√µes com foco em corretude, seguran√ßa e permiss√µes; n√£o edita.",
+      "mode": "subagent",
+      "prompt": "{file:./.opencode/agents/code-reviewer.md}\n{file:./.opencode/skills/teams-bot-skill/SKILL.md}",
+      "permission": {"edit": "deny", "bash": "deny", "task": {"*": "deny"}},
+      "tools": {"read": true, "edit": false, "bash": false}
+    },
+    "test-engineer": {
+      "description": "Valida build e cen√°rios do bot no Playground; n√£o altera c√≥digo de produ√ß√£o.",
+      "mode": "subagent",
+      "prompt": "{file:./.opencode/agents/test-engineer.md}\n{file:./.opencode/skills/teams-bot-skill/SKILL.md}",
+      "permission": {"edit": "deny", "bash": "allow", "task": {"*": "deny"}},
+      "tools": {"read": true, "edit": false, "bash": true}
+    }
+  },
+  "mcp": {
+    "servers": {
+      "notion": {
+        "type": "remote",
+        "url": "https://mcp.notion.com/mcp"
+      },
+      "trello": {
+        "type": "remote",
+        "url": "https://mcp.trello.com/v1"
+      }
+    }
+  }
+}
